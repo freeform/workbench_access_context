@@ -46,7 +46,7 @@ class workbench_access_context_handler_argument_access extends views_handler_arg
       }
     }
     else if ($this->options['workbench_access_context'] == 'mid') {
-      $mlid = _get_mlid('node/'.$this->argument, 'main-menu');
+      $mlid = $this->get_mlid('node/'.$this->argument, 'main-menu');
       if (empty($mlid)) {
           return;
       }
@@ -77,16 +77,14 @@ class workbench_access_context_handler_argument_access extends views_handler_arg
     $this->query->add_where(0, $this->query->base_table . '.nid', $subquery, 'IN');
     return;
   }
-}
-
-function _get_mlid($path, $menu_name) {
-
-	$mlid = db_select('menu_links' , 'ml')
-	->condition('ml.link_path' , $path)
-	->condition('ml.menu_name',$menu_name)
-	->fields('ml' , array('mlid'))
-	->execute()
-	->fetchField();
-    watchdog('menuquery', $mlid);
-	return $mlid;
+  
+  function get_mlid($path, $menu_name) {
+    $mlid = db_select('menu_links' , 'ml')
+     ->condition('ml.link_path' , $path)
+     ->condition('ml.menu_name',$menu_name)
+     ->fields('ml' , array('mlid'))
+     ->execute()
+     ->fetchField();
+    return $mlid;
+  }
 }
