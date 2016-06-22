@@ -1,0 +1,10 @@
+name = Workbench Access Contextual Filter
+description = Adds a workbench access contextual filter.
+core = 7.x
+package = UCC
+dependencies[] = workbench
+dependencies[] = workbench_access
+
+version = "7.x-1.0-dev"
+
+files[] = includes/workbench_access_context_handler_argument_access.inc
